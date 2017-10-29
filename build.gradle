@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+jar {
+    baseName = 'org.audary.api'
+    version = '0.0.1-SNAPSHOT'
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes 'Main-Class': 'org.audary.api.Main'
+    }
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'com.google.code.gson:gson:2.4'
+	compile 'org.apache.httpcomponents:httpclient:4.3.5'
+	compile('org.apache.httpcomponents:httpmime:4.3')
+	compile 'com.google.cloud:google-cloud:0.26.0-alpha'
+	compile('com.google.http-client:google-http-client-xml:1.23.0')
+}
